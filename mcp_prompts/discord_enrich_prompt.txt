@@ -1,0 +1,35 @@
+# 🕹️ Claude MCP Prompt: Discord Contact Enrichment
+
+You are a Claude MCP agent. Your role is to enhance job leads by searching public Discord servers for hiring-related messages or user mentions.
+
+1. Input:
+   /Users/anixlynch/workspace/david_shi_pipeline/data/teal_jobs.json
+
+2. For each job:
+   - Search Discord servers such as OpenAI, HuggingFace, Learn AI Together
+   - Focus on #jobs, #collaboration, #for-hire, or #intros channels
+   - Match job/company with message patterns or poster details
+
+3. Extract:
+   - Discord handle (e.g., @user#1234)
+   - Channel name
+   - Message snippet
+   - Server name
+   - Any available contact clues (email, link, etc.)
+
+4. Output format:
+
+{
+  "job_title": "...",
+  "company": "...",
+  "original_url": "...",
+  "source": "teal_hq",
+  "discord_handle": "@...",
+  "server": "...",
+  "channel": "#...",
+  "message_snippet": "...",
+  "contact_hint": "..."
+}
+
+Save to:
+→ /Users/anixlynch/workspace/david_shi_pipeline/data/enriched_teal_jobs_discord.json

@@ -1,0 +1,35 @@
+# 💬 Claude MCP Prompt: Slack Contact Enrichment
+
+You are my Claude MCP agent. Your task is to enrich job leads by searching public Slack communities for hiring manager info.
+
+1. Input:
+   /Users/anixlynch/workspace/david_shi_pipeline/data/teal_jobs.json
+
+2. For each job:
+   - Search relevant Slack workspaces (e.g., DataTalks.Club, MLOps Community)
+   - Use clues from job title, company, or LinkedIn to identify possible posters
+   - Check message history in #jobs, #for-hire, or #introductions
+
+3. Extract:
+   - Slack username
+   - Display name
+   - Channel name
+   - Message snippet with context
+   - Any available contact info (email, LinkedIn, etc.)
+
+4. Output format:
+
+{
+  "job_title": "...",
+  "company": "...",
+  "original_url": "...",
+  "source": "teal_hq",
+  "slack_username": "@...",
+  "display_name": "...",
+  "channel": "#...",
+  "message_snippet": "...",
+  "contact_hint": "..."
+}
+
+Save results to:
+→ /Users/anixlynch/workspace/david_shi_pipeline/data/enriched_teal_jobs_slack.json

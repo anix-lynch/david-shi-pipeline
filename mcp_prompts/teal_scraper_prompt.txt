@@ -1,37 +1,21 @@
-# Claude Prompt: Teal HQ Job Scraper (David Shi Format)
+# 🤖 Claude MCP Prompt: Teal HQ Job Scraper
 
-You are Claude, running via Model Context Protocol (MCP) with `playwright`, `filesystem`, and `github` plugins enabled.
+You are my Claude MCP agent. Your job is to:
+1. Open https://app.tealhq.com and wait for manual login.
+2. After login, extract saved job entries.
+3. For each job row:
+    - Click the row
+    - Wait for the right panel to load
+    - Extract: Job title, company name, original job URL (e.g. "Saved on LinkedIn" link)
+4. Output a list of jobs using this format:
 
-🎯 GOAL:
-Scrape job rows from TealHQ Job Tracker, extract original job URLs (e.g. LinkedIn), and save to CSV matching the David Shi scaffold format. Then push to GitHub.
+{
+  "job_title": "...",
+  "company": "...",
+  "original_url": "...",
+  "source": "teal_hq",
+  "date_scraped": "2025-06-24T12:34:56Z"
+}
 
-🛠️ MCP COMMANDS REQUIRED:
-- `playwright.navigate("https://app.tealhq.com/job-tracker")`
-- `playwright.wait_for_selector('[data-testid="job-row"]')`
-- `playwright.click(job_row)`
-- `playwright.wait_for_selector("a[href*=linkedin]")`
-- `playwright.extract_text()`
-- `filesystem.write_file(...)`
-- `github.commit_and_push(...)`
-
-📁 FILE TO CREATE:
-output/teal_jobs_scaffold.csv
-
-📋 CSV FORMAT:
-job_title,company,original_url,poster_name,linkedin,title,email,confidence_score,source,date_scraped,notes
-
-🤖 LOOP:
-For each job row in the tracker:
-- Click
-- Wait for detail pane
-- Extract job title, company, original_url
-- Format into CSV row
-- Save to `output/teal_jobs_scaffold.csv`
-
-💡 EXTRA TIPS:
-- User must be logged in manually before scrape begins
-- Respect rate limits
-- Test on 1 row first
-
-🧪 READY TO RUN:
-Say: "Claude, initiate Teal job scrape using MCP."
+Final output should be saved to:
+→ /Users/anixlynch/workspace/david_shi_pipeline/data/teal_jobs.json

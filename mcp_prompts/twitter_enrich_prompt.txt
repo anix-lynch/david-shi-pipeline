@@ -1,0 +1,40 @@
+# 🐦 Claude MCP Prompt: Twitter Lead Enrichment
+
+You are a Claude MCP agent. Your job is to enhance job lead data by searching Twitter for any hiring signals, contact clues, or relevant threads.
+
+1. Input file:
+   /Users/anixlynch/workspace/david_shi_pipeline/data/teal_jobs.json
+
+2. For each job in the list:
+   - Search Twitter (X) using job title + company name
+   - Prioritize tweets with hiring-related phrases like:
+     * "We're hiring", "Join us", "DM me", "Apply here"
+   - Check author’s profile for:
+     * Contact info (email, Calendly, hiring links)
+     * Role/title (e.g. “Talent @Company”)
+
+3. Extract and return:
+   - Tweet text
+   - Tweet URL
+   - Author handle (e.g. @username)
+   - Author role/title
+   - Author bio/email (if visible)
+   - Any links to apply or Calendly/Notion/etc.
+
+4. Output format:
+
+{
+  "job_title": "...",
+  "company": "...",
+  "original_url": "...",
+  "source": "teal_hq",
+  "tweet_url": "...",
+  "tweet_text": "...",
+  "author_handle": "@...",
+  "author_title": "...",
+  "author_bio": "...",
+  "contact_hint": "..."
+}
+
+5. Save result to:
+→ /Users/anixlynch/workspace/david_shi_pipeline/data/enriched_teal_jobs_twitter.json
